@@ -10,8 +10,8 @@ class CustomValidatorTest {
 
     object PersonValidator : Validator<Person> {
         override val label = "Person"
-        val name = string(Person::name).notBlank()
-        val age = string(Person::age)
+        val name = string(Person::name).notBlank().required()
+        val age = string(Person::age).optional()
         override fun validate(value: Person): Validity<Person> = listOf(
             name.validate(value.name),
             age.validate(value.age)
@@ -24,5 +24,5 @@ class CustomValidatorTest {
         expect(res.reasons.first()).toBe("name is required to not be empty but it was")
     }
 
-    fun person(): Validator<Person> = custom("person")
+    fun person(): Validator<Person> = custom<Person>("person").optional()
 }

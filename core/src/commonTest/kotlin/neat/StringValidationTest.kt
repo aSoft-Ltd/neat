@@ -8,7 +8,7 @@ class StringValidationTest {
 
     @Test
     fun should_be_able_to_create_a_void_string_validator() {
-        val validator = string("test")
+        val validator = string("test").required()
         expect(validator.validate("test")).toBe<Valid<*>>()
     }
 
@@ -20,13 +20,13 @@ class StringValidationTest {
 
     @Test
     fun should_be_able_to_mark_a_string_with_a_length_of_4_as_valid() {
-        val validator = string().length(4)
+        val validator = string().length(4).required()
         expect(validator.validate("test")).toBe<Valid<*>>()
     }
 
     @Test
     fun should_be_able_to_mark_a_string_with_a_length_greater_than_4_as_invalid() {
-        val validator = string("test").length(4)
+        val validator = string("test").length(4).required()
         val res = expect(validator.validate("testimony")).toBe<Invalid<*>>()
         expect(res.reasons.first()).toBe("test should have 4 character(s), but testimony has 9 character(s) instead")
     }
@@ -62,20 +62,28 @@ class StringValidationTest {
 
     @Test
     fun should_fail_if_a_required_string_is_blank() {
-        val validator = string("test").required().notBlank()
+        val validator = string("test").notBlank().required()
         val res = expect(validator.validate("")).toBe<Invalid<*>>()
         expect(res.reasons.first()).toBe("test is required to not be empty but it was")
     }
 
     @Test
     fun should_fail_to_retrieve_information_that_are_not_set_from_validators() {
-        val validator = string("test").required().notBlank()
+        val validator = string("test").notBlank().optional()
         expect(validator.length).toBe(null)
     }
 
     @Test
     fun should_fail_to_retrieve_information_that_are_set_from_validators() {
-        val validator = string("test").required().length(4)
+        val validator = string("test").length(4).required()
+        expect(validator.length).toBe(4)
+    }
+
+    var name: String? = "test"
+
+    @Test
+    fun should_be_able_to_chain_optional_validators_with_a_block_as_if_it_is_not_optional() {
+        val validator = string(::name).length(4).required()
         expect(validator.length).toBe(4)
     }
 }
