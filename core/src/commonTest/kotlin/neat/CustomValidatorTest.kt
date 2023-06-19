@@ -8,21 +8,38 @@ class CustomValidatorTest {
 
     data class Person(val name: String, val age: String?)
 
-    object PersonValidator : Validator<Person> {
-        override val label = "Person"
-        val name = string(Person::name).notBlank().required()
-        val age = string(Person::age).optional()
-        override fun validate(value: Person): Validity<Person> = listOf(
-            name.validate(value.name),
-            age.validate(value.age)
-        ).aggregate(value)
+    class PersonValidators(label: String) : CompoundValidators<Person>(label) {
+        val name = Person::name.validator().notBlank().required()
+        val age = Person::age.validator().optional()
     }
 
     @Test
     fun should_create_a_customer_validator() {
-        val res = expect(PersonValidator.validate(Person("", ""))).toBe<Invalid<Person>>()
-        expect(res.reasons.first()).toBe("name is required to not be empty but it was")
+        val validator = person().optional()
+        val res = expect(validator.validate(Person("", ""))).toBe<Invalid<Person>>()
+        expect(res.reasons.first()).toBe("person.name is required to not be empty but it was")
     }
 
-    fun person(): Validator<Person> = custom<Person>("person").optional()
+    data class Age(val value: String)
+
+    class AgeValidator(label: String) : CompoundValidators<Age>(label) {
+        val value = Age::value.validator().notBlank().required()
+    }
+
+    data class Student(val age: Age)
+
+    class StudentValidator(label: String) : CompoundValidators<Student>(label) {
+        val age = Student::age.validator { AgeValidator(it) }.required()
+    }
+
+    fun student(label: String = "student"): Validators<Student> = StudentValidator(label)
+
+    @Test
+    fun should_be_able_to_validate_deeply_nested_objects() {
+        val validator = student().required()
+        val res = expect(validator.validate(Student(Age("")))).toBe<Invalid<*>>()
+        expect(res.reasons.first()).toBe("student.age.value is required to not be empty but it was")
+    }
+
+    fun person(label: String = "person") = PersonValidators(label)
 }

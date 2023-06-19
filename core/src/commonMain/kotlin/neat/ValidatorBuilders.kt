@@ -7,8 +7,8 @@ import neat.internal.OptionalValidator
 import neat.internal.RequiredValidator
 
 fun <T> Validator<T>.root(key: String): ValidatingFunction<*, *>? {
-    val optionals = (this as? OptionalValidator<*>)?.validators?.all ?: emptyMap()
-    val required = (this as? RequiredValidator<*>)?.validators?.all ?: emptyMap()
+    val optionals = (this as? OptionalValidator<*>)?.validators?.functions ?: emptyMap()
+    val required = (this as? RequiredValidator<*>)?.validators?.functions ?: emptyMap()
     return buildMap {
         putAll(optionals)
         putAll(required)
@@ -19,8 +19,8 @@ inline fun Validator<*>.int(key: String) = root(key)?.metadata as? Int
 
 inline fun <T> Validator<T>.set(builder: Validator<T>.() -> Validator<T>): Validator<T> = builder()
 
-inline val Validator<*>.required get() = this is RequiredValidator
-inline val Validator<*>.optional get() = this is OptionalValidator
+inline val Validator<*>.required get() = this is RequiredValidator<*>
+inline val Validator<*>.optional get() = this is OptionalValidator<*>
 
 fun <T> Validators<T>.execute(
     function: (T & Any) -> Validity<T>
@@ -33,6 +33,6 @@ fun <T> Validators<T>.check(
     if (predicate(it)) Valid(it) else Invalid(it, listOf(message(it)))
 }
 
-fun <T> custom(label: String) = Validators<T>(label, mutableMapOf())
+fun <T> custom(label: String) = Validators<T>(label)
 
-fun <T> validator(label: String) = Validators<T>(label, mutableMapOf())
+fun <T> validator(label: String) = Validators<T>(label)

@@ -1,20 +1,24 @@
 package neat.internal
 
-import neat.Invalid
+import neat.CompoundValidators
 import neat.Validator
 import neat.Validators
 import neat.Validity
 import neat.aggregate
 
 @PublishedApi
-internal class RequiredValidator<T : Any>(
-    internal val validators: Validators<T>,
-    val message: (T) -> String = { "${validators.label} is required, but was null" }
-) : Validator<T> {
+internal class RequiredValidator<P : Any>(
+    internal val validators: Validators<P>,
+    val message: (P) -> String = { "${validators.label} is required, but was null" }
+) : Validator<P> {
     override val label: String = validators.label
-    override fun validate(value: T): Validity<T> = when (value) {
-        null -> Invalid(value, listOf(message(value)))
-        else -> validators.all.values.map {
+    override fun validate(value: P): Validity<P> = if (validators is CompoundValidators) {
+        validateRecursively(
+            validators = validators as CompoundValidators<Any?>,
+            value = value
+        ).aggregate(value)
+    } else {
+        validators.functions.values.map {
             it.function(value)
         }.aggregate(value)
     }
