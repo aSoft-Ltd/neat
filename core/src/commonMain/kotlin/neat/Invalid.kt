@@ -12,7 +12,13 @@ data class Invalid<out T>(
         val terminator = "error" + if (size > 1) "s" else ""
         return ValidityException(
             message = "You have $size validation $terminator",
-            reasons = reasons
+            reasons = reasons,
+            details = buildString {
+                appendLine("Validation Error(s)")
+                reasons.forEachIndexed { idx, it ->
+                    appendLine("\t${idx + 1}. $it")
+                }
+            }
         )
     }
 
