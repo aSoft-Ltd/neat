@@ -83,7 +83,7 @@ class StringValidationTest {
 
     @Test
     fun should_be_able_to_chain_optional_validators_with_a_block_as_if_it_is_not_optional() {
-        val validator = string(::name).length(4).required()
+        val validator = string(::name).length(4).optional()
         expect(validator.length).toBe(4)
     }
 }

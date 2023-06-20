@@ -17,14 +17,14 @@ internal object Key {
     const val NOT_BLANK = "$root.not.blank"
 }
 
-fun <T : String?> Validators<T>.length(
+fun <T : String?, V : Validators<T>> V.length(
     value: Int,
     message: (value: String) -> String = { "$label should have $value character(s), but $it has ${it.length} character(s) instead" }
 ) = append(Key.LENGTH, value) { if (it.length == value) Valid(it) else Invalid(it, listOf(message(it))) }
 
 inline val <T : String?> Validator<T>.length: Int? get() = int(Key.LENGTH)
 
-fun <T : String?> Validators<T>.min(
+fun <T : String?, V : Validators<T>> V.min(
     value: Int,
     message: (String) -> String = { "$label should have a more than $value character(s), but $it has ${it.length} character(s) instead" }
 ) = append(Key.MIN, value) {
@@ -33,7 +33,7 @@ fun <T : String?> Validators<T>.min(
 
 inline val <T : String?> Validator<T>.min get() = int(Key.MIN)
 
-fun <T : String?> Validators<T>.max(
+fun <T : String?, V : Validators<T>> V.max(
     value: Int,
     message: (String) -> String = { "$label should have less than $value character(s), but $it has ${it.length} character(s) instead" }
 ) = append(Key.MAX, value) {
@@ -42,6 +42,6 @@ fun <T : String?> Validators<T>.max(
 
 inline val <T : String?> Validator<T>.max get() = int(Key.MAX)
 
-fun <T : String?> Validators<T>.notBlank(
+fun <T : String?, V : Validators<T>> V.notBlank(
     message: (String) -> String = { "$label is required to not be empty but it was" }
 ) = append(Key.NOT_BLANK) { if (it.isNotBlank()) Valid(it) else Invalid(it, listOf(message(it))) }
