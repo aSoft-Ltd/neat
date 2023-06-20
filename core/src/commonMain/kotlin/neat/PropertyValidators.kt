@@ -13,9 +13,9 @@ class PropertyValidators<P, C>(
 
     override fun required(
         message: (C) -> String
-    ): Validator<@UnsafeVariance C & Any> {
+    ): Validator<C> {
         parent.properties.add(this)
-        return RequiredValidator(this as Validators<C & Any>, message)
+        return RequiredValidator(this as Validators<C & Any>, message) as Validator<C>
     }
 
     override fun optional(): Validator<C?> {

@@ -31,7 +31,7 @@ open class Validators<T>(val label: String) {
 
     open fun required(
         message: (T) -> String = { "$label is required, but was null" }
-    ): Validator<T & Any> = RequiredValidator(this as Validators<T & Any>, message) as Validator<T>
+    ): Validator<T> = RequiredValidator(this as Validators<T & Any>, message) as Validator<T>
 
     open fun optional(): Validator<T?> = OptionalValidator(this)
 }
