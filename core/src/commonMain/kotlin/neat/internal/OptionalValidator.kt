@@ -8,9 +8,7 @@ import neat.Validity
 import neat.aggregate
 
 @PublishedApi
-internal class OptionalValidator<P>(
-    internal val validators: Validators<P>,
-) : Validator<P?> {
+internal class OptionalValidator<P>(val validators: Validators<P>) : Validator<P?> {
     override val label: String = validators.label
     override fun validate(value: P?): Validity<P?> {
         if (value == null) return Valid(value)
