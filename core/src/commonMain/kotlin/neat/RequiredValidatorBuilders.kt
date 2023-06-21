@@ -2,7 +2,7 @@ package neat
 
 import neat.internal.RequiredValidator
 
-fun <T : Any> Validators<T>.required(
+fun <T> Validators<T>.required(
     message: String = "$label is required, but was null"
 ): Validator<T> = RequiredValidator(this, message)
 
