@@ -7,6 +7,8 @@ data class Invalid<out T>(
     val reasons: List<String>
 ) : Validity<T> {
 
+    constructor(value: T, reason: String) : this(value, listOf(reason))
+
     fun exception(): ValidityException {
         val size = reasons.size
         val terminator = "error" + if (size > 1) "s" else ""
