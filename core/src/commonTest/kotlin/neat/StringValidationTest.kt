@@ -2,6 +2,7 @@ package neat
 
 import kommander.expect
 import kommander.toBe
+import kotlin.reflect.KMutableProperty0
 import kotlin.test.Test
 
 class StringValidationTest {
