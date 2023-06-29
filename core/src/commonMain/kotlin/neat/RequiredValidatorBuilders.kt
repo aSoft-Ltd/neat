@@ -1,6 +1,7 @@
 package neat
 
 import neat.internal.RequiredValidator
+import kotlin.reflect.KProperty0
 
 fun <T> Validators<T>.required(
     message: String = "$label is required, but was null"
@@ -12,3 +13,5 @@ fun <P, C : Any> PropertyValidators<P, C>.required(
     parent.properties.add(this)
     return RequiredValidator(this, message)
 }
+
+val <T : Any> KProperty0<T?>.required get() = get() ?: throw IllegalArgumentException("$name is required but was null")
