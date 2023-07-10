@@ -1,14 +1,13 @@
 package neat
 
 import neat.internal.OptionalValidator
-import neat.internal.RequiredValidator
 import kotlin.reflect.KProperty1
 
 class PropertyValidators<P, C>(
     label: String,
     val parent: CompoundValidators<P>,
     val nested: CompoundValidators<P>?,
-    val propery: KProperty1<P, C>
+    val property: KProperty1<P, C>
 ) : Validators<C>(label) {
 
 //    override fun required(

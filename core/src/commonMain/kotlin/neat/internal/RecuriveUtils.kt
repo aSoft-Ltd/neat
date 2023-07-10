@@ -4,7 +4,7 @@ import neat.CompoundValidators
 import neat.Validity
 
 fun validateRecursively(validators: CompoundValidators<Any?>, value: Any?): List<Validity<*>> = validators.properties.flatMap { propertyValidator ->
-    val cValue = propertyValidator.propery.get(value)
+    val cValue = propertyValidator.property.get(value)
     
     val nested = propertyValidator.nested
     val nesteds = if (nested == null) emptyList() else validateRecursively(nested, cValue)

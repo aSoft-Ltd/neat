@@ -1,6 +1,13 @@
 @file:Suppress("NOTHING_TO_INLINE")
 
-package neat
+package neat.collections
+
+import neat.Invalid
+import neat.Valid
+import neat.Validator
+import neat.Validators
+import neat.append
+import neat.int
 
 @PublishedApi
 internal object CollectionKey {
