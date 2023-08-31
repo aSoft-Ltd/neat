@@ -23,7 +23,7 @@ allprojects {
 tasks.dokkaHtmlMultiModule {
     moduleName.set("Neat")
     outputDirectory.set(rootDir.resolve("docs"))
-    moduleVersion.set(asoft.versions.root.get())
+    moduleVersion.set(libs.versions.asoft.get())
     includes.from("ReadMe.md")
 }
 
