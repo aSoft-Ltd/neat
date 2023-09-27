@@ -1,4 +1,4 @@
-import expect.expect
+import kommander.expect
 import formatter.format
 import kommander.expect
 import kotlin.test.Test
