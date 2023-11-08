@@ -1,12 +1,10 @@
 @file:JsExport
 @file:Suppress("NON_EXPORTABLE_TYPE")
 
-package formatter
+package neat
 
 import kotlin.js.JsName
-import liquid.JsExport
 
-@Deprecated("use liquid instead")
 interface NumberFormatter {
     val options: NumberFormatterRawOptions
 

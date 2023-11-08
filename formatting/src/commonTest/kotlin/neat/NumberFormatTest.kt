@@ -1,4 +1,4 @@
-package liquid
+package neat
 
 import kommander.expect
 import kotlin.test.Test

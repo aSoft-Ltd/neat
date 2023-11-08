@@ -1,9 +1,9 @@
-package formatter.internal
+package neat.internal
 
-import formatter.NumberFormatter
-import formatter.NumberFormatterOptions
-import formatter.NumberFormatterRawOptions
-import formatter.toFormatterOptions
+import neat.NumberFormatter
+import neat.NumberFormatterOptions
+import neat.NumberFormatterRawOptions
+import neat.toFormatterOptions
 import kotlin.jvm.JvmOverloads
 import kotlin.math.round
 

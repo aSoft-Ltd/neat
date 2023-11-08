@@ -1,6 +1,6 @@
-package liquid
+package neat
 
-import liquid.internal.NumberFormatterImpl
+import neat.internal.NumberFormatterImpl
 import kotlin.jvm.JvmOverloads
 
 fun NumberFormatter(

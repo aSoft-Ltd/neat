@@ -1,4 +1,4 @@
-package liquid
+package neat
 
 @OptIn(ExperimentalMultiplatform::class)
 @Retention(AnnotationRetention.BINARY)

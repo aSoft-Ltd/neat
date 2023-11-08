@@ -1,9 +1,8 @@
-package formatter
+package neat
 
 import kotlin.jvm.JvmField
 import kotlin.math.pow
 
-@Deprecated("use liquid instead")
 data class NumberFormatterOptions(
     override val abbreviate: Boolean = DEFAULT_ABBREVIATE,
     override val prefix: String = DEFAULT_PREFIX,

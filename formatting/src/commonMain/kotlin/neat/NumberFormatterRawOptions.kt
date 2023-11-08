@@ -1,14 +1,14 @@
 @file:Suppress("WRONG_EXPORTED_DECLARATION")
 
-package liquid
+package neat
 
-import liquid.NumberFormatterOptions.Companion.DEFAULT_ABBREVIATE
-import liquid.NumberFormatterOptions.Companion.DEFAULT_DECIMALS_ABBREVIATED
-import liquid.NumberFormatterOptions.Companion.DEFAULT_DECIMAL_SEPARATOR
-import liquid.NumberFormatterOptions.Companion.DEFAULT_ENFORCE_DECIMALS
-import liquid.NumberFormatterOptions.Companion.DEFAULT_POSTFIX
-import liquid.NumberFormatterOptions.Companion.DEFAULT_PREFIX
-import liquid.NumberFormatterOptions.Companion.DEFAULT_THOUSAND_SEPERATOR
+import neat.NumberFormatterOptions.Companion.DEFAULT_ABBREVIATE
+import neat.NumberFormatterOptions.Companion.DEFAULT_DECIMALS_ABBREVIATED
+import neat.NumberFormatterOptions.Companion.DEFAULT_DECIMAL_SEPARATOR
+import neat.NumberFormatterOptions.Companion.DEFAULT_ENFORCE_DECIMALS
+import neat.NumberFormatterOptions.Companion.DEFAULT_POSTFIX
+import neat.NumberFormatterOptions.Companion.DEFAULT_PREFIX
+import neat.NumberFormatterOptions.Companion.DEFAULT_THOUSAND_SEPERATOR
 
 @JsExport
 interface NumberFormatterRawOptions {
