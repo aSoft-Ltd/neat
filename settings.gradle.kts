@@ -15,7 +15,9 @@ fun includeSubs(base: String, path: String = base, vararg subs: String) {
 
 rootProject.name = "neat"
 
-includeBuild("../kommander")
+listOf("kommander","kotlinx-interoperable").forEach {
+    includeBuild("../${it}")
+}
 
 // submodules
 includeSubs("neat", ".", "validation", "formatting")
