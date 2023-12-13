@@ -9,6 +9,7 @@ import neat.NumberFormatterOptions.Companion.DEFAULT_ENFORCE_DECIMALS
 import neat.NumberFormatterOptions.Companion.DEFAULT_POSTFIX
 import neat.NumberFormatterOptions.Companion.DEFAULT_PREFIX
 import neat.NumberFormatterOptions.Companion.DEFAULT_THOUSAND_SEPERATOR
+import kotlinx.JsExport
 
 @JsExport
 interface NumberFormatterRawOptions {

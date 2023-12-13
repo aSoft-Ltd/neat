@@ -4,6 +4,7 @@
 package neat
 
 import kotlin.js.JsName
+import kotlinx.JsExport
 
 interface NumberFormatter {
     val options: NumberFormatterRawOptions
