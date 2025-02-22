@@ -1,5 +1,6 @@
 package neat
 
+import neat.internal.DecimalFormatterImpl
 import neat.internal.NumberFormatterImpl
 import kotlin.jvm.JvmOverloads
 
@@ -21,6 +22,12 @@ fun NumberFormatter(
         decimalSeparator,
         thousandsSeparator
     )
+)
+
+fun DecimalFormatter(
+    pattern:String = "#,###,###,##0.00"
+) = DecimalFormatterImpl(
+    pattern = pattern
 )
 
 @JvmOverloads
