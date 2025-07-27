@@ -1,6 +1,3 @@
-import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension
-import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask
-
 plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
@@ -24,19 +21,9 @@ kotlin {
         commonTest.dependencies {
             implementation(libs.kommander.core)
         }
+
+        if(Targeting.JVM) jvmTest.dependencies {
+            implementation(kotlin("test-junit5"))
+        }
     }
-}
-
-rootProject.the<NodeJsRootExtension>().apply {
-    nodeVersion = npm.versions.node.version.get()
-    nodeDownloadBaseUrl = npm.versions.node.url.get()
-}
-
-rootProject.tasks.withType<KotlinNpmInstallTask>().configureEach {
-    args.add("--ignore-engines")
-}
-
-tasks.named("wasmJsTestTestDevelopmentExecutableCompileSync").configure {
-    mustRunAfter(tasks.named("jsBrowserTest"))
-    mustRunAfter(tasks.named("jsNodeTest"))
 }
